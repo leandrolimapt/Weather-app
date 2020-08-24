@@ -1,3 +1,6 @@
+<style>
+  @import 'assets/styles/main.css';
+</style>
 <template>
   <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''">
     <main>
@@ -5,7 +8,7 @@
         <input 
         type="text" 
         class="search-bar" 
-        placeholder="Pesquisar..."
+        placeholder="Search..."
         v-model="query"
         @keypress="fetchWeather"
         />
@@ -16,15 +19,27 @@
           <div class="date">{{ dateBuilder() }}</div>
         </div>
         <div class="weather-box">
-          <div class="temp">{{Math.round(weather.main.temp)}}</div>
-          <div class="weather">{{weather.weather[0].main}}</div>
+          <div id="image" :class="weather.main && 
+            weather.weather[0].main.toLowerCase ()"> 
+          </div>
+          <div class="temp">{{Math.round(weather.main.temp)}}<label class="degree">°C</label></div>
+          <div class="weather"><span id="weather">{{weather.weather[0].main}}</span></div>   
+          <div class="more-info">
+            <div class="item">{{weather.wind.speed}} km/h
+              <div class="description">Wind</div>
+            </div>
+            <div class="item">{{weather.main.humidity}}%
+              <div class="description">Humidity</div>
+            </div>
+            <div class="item">{{Math.round(weather.main.temp_max)}}°
+              <div class="description">Maximum</div>
+            </div>
+          </div>
         </div>
       </div> 
     </main>
-   
   </div>
 </template>
-
 <script>
 export default {
   name: 'App',
@@ -50,105 +65,14 @@ export default {
     },
     dateBuilder () {
       let d = new Date();
-      let months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
-      let days = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+      let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       let day = days[d.getDay()];
       let date = d.getDate();
       let month = months[d.getMonth()];
       let year = d.getFullYear();
-      return `${day}, ${date} ${month} de ${year}`;
+      return `${day} ${date} ${month} ${year}`;
     }
   }
 }
 </script>
-
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body{
-  font-family: 'Titillium Web', sans-serif;
-}
-#app{
-  background-image: url("./assets/cold.jpg");
-  background-size: cover;
-  background-position: bottom;
-  transition: 0.4s;
-}
-
-#app.warm{
-  background-image: url("./assets/warm.jpg");
-}
-
-main{
-  min-height: 100vh;
-  padding: 25px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
-}
-.search-box .search-bar{
-  display: block;
-  width: 100%;
-  padding: 15px;
-  color: #313131;
-  font-size: 1em;
-  appearance: none;
-  border: none;
-  outline: none;
-  background: none;
-
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 0 16px 0 16px;
-  transition: 0.4s;
-}
-.search-box .search-bar:focus{
-  background-color: rgba(255, 255, 255, 0.75);
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
-  border-radius: 16px 0 16px 0;
-}
-
-.location-box .location{
-  color: #fff;
-  font-size: 2em;
-  font-weight: 600;
-  text-align: center;
-  text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
-}
-
-.location-box .date{
-  color: #fff;
-  font-size: 1.8em;
-  font-weight: 600;
-  font-style: italic;
-  text-align: center;
-}
-
-.weather-box{
-  text-align: center;
-}
-
-.weather-box .temp{
-  display: inline-block;
-  padding: 10px 25px;
-  color: #fff;
-  font-size: 100px;
-  font-weight: 700;
-  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 0.25);
-  border-radius: 16px;
-  margin: 30px 0;
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-}
-
-.weather-box .weather{
-  font-size: 2em;
-  color: #fff;
-  font-weight: 600;
-  font-style: italic;
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-}
-</style>
