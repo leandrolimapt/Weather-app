@@ -1,21 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'Alata', sans-serif;
 }
 
-body {
-  font-family: 'Titillium Web', sans-serif;
+html {
+  max-height: 100%;
 }
 
 #app {
-  background-color: #f2fbff;
   background-size: cover;
   background-position: top;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  height: 100vh;
 }
 
 #app.warm .temp {
@@ -44,20 +46,12 @@ body {
   content: url("../img/thunderstorm.svg");
 }
 
-main {
-  min-height: 100vh;
-  padding: 25px;
-}
-
-.search-box {
-  margin-bottom: 10px;
-}
-
 .search-box .search-bar {
-  display: block;
+  padding: 20px 20px;
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  padding: 15px;
-  color: #583cdf;
+  color: #FFF;
   font-size: 1em;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -65,23 +59,53 @@ main {
   border: none;
   outline: none;
   background: none;
-  background-color: #FFF;
-  border-radius: 16px;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  background: #173c56;
 }
 
-.location-box {
+.search-box .search-bar::-webkit-input-placeholder {
+  color: #FFF;
+}
+
+.search-box .search-bar:-ms-input-placeholder {
+  color: #FFF;
+}
+
+.search-box .search-bar::-ms-input-placeholder {
+  color: #FFF;
+}
+
+.search-box .search-bar::placeholder {
+  color: #FFF;
+}
+
+.weather-wrap {
+  height: 100vh;
+  background: #d7e4ec;
+}
+
+.weather-wrap .content {
+  padding: 20px 20px;
+  text-align: center;
+}
+
+.weather-wrap .content .title {
+  font-size: 0.8em;
   margin-bottom: 20px;
 }
 
-.location-box .location {
+.weather-wrap .content .location-box {
+  margin-bottom: 20px;
+}
+
+.weather-wrap .content .location-box .location {
   color: #583cdf;
   font-size: 1.5em;
   font-weight: 600;
 }
 
-.location-box .date {
+.weather-wrap .content .location-box .date {
   color: #777777;
   font-size: .8em;
   font-weight: 600;
@@ -134,5 +158,42 @@ main {
 .weather-box .more-info .item .description {
   font-size: 0.4em;
   color: #777777;
+}
+
+.landing-page {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url("../img/weather.jpg");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+}
+
+.landing-page .container {
+  margin: 0 20px;
+}
+
+.landing-page .content {
+  padding: 40vh 0;
+  text-align: center;
+  color: #FFF;
+}
+
+.landing-page .content h1 {
+  font-size: 3em;
+}
+
+.error {
+  height: 100vh;
+  background: #6193ae;
+  padding: 30vh 0;
+  text-align: center;
+  color: #FFF;
+}
+
+.error img {
+  max-height: 100px;
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=main.css.map */
