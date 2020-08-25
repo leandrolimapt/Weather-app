@@ -11,40 +11,63 @@
   <div class="weather-wrap" v-if="weather.main">
     <div class="content">
       <p class="title">Weather Forecast</p>
-      <div class="location-box">
+
+      <div class="weather-box">
+        <div id="image" :class="weather.main && 
+          weather.weather[0].main.toLowerCase ()"> 
+        </div>
+        <div class="weather"><span id="weather">{{weather.weather[0].main}}</span></div>
+        <div class="temp">{{Math.round(weather.main.temp)}}<sup>°C</sup></div>
+      </div>
+       <div class="location-box">
         <div class="location">{{weather.name}}, {{weather.sys.country}}</div>
         <div class="date">{{ dateBuilder() }}</div>
       </div>
     </div>
-    
-    <div class="weather-box">
-      <div id="image" :class="weather.main && 
-        weather.weather[0].main.toLowerCase ()"> 
-      </div>
-      <div class="temp">{{Math.round(weather.main.temp)}}<label class="degree"></label></div>
-      <div class="weather"><span id="weather">{{weather.weather[0].main}}</span></div>   
-      <div class="more-info">
-        <div class="item">{{weather.wind.speed}} km/h
-          <div class="description">Wind</div>
+    <div class="weather-card">
+      <div class="grid-container">
+        <div class="item1">
+          <h3>More</h3>
         </div>
-        <div class="item">{{weather.main.humidity}}%
-          <div class="description">Humidity</div>
+         <div>
+          <p>Min</p>
         </div>
-        <div class="item">{{Math.round(weather.main.temp_max)}}°
-          <div class="description">Maximum</div>
+        <div>
+          <span>{{Math.round(weather.main.temp_min)}}°C</span>
+        </div>
+         <div>
+          <p>Max</p>
+        </div>
+        <div>
+          <span>{{Math.round(weather.main.temp_max)}}°C</span>
+        </div>
+        <div>
+          <p>Wind</p>
+        </div>
+        <div>
+          <span>{{weather.wind.speed}} km/h</span>
+        </div>
+        <div>
+          <p>Humidity</p>
+        </div>
+        <div>
+          <span>{{weather.main.humidity}}%</span>
         </div>
       </div>
     </div>
+    
   </div> 
   <div class="error" v-else-if="error != null">
-    <img src="../assets/img/cry.svg">
+    <img src="../assets/img/error.svg">
     <h1>{{error}}</h1>
   </div>
   <div class="landing-page" v-else>
     <div class="container">
       <div class="content">
+        <img src="../assets/img/weather.svg">
         <h4>Weather APP</h4>
         <h1>Welcome</h1>
+        <p>What's the weather like today?</p>
       </div>
     </div>
   </div>
